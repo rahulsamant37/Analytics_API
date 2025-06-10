@@ -1,19 +1,23 @@
 from fastapi import APIRouter
-from .schema import EventSchema
+from .schema import EventSchema, EventListSchema
 
 router = APIRouter()
 
 @router.get("/")
-def read_events():
+def read_events() -> EventListSchema:
     """
     Endpoint to retrieve a list of events.
     """
     return {
-        "results": [1,2,3]
+        "results": [
+            {"id": 1},
+            {"id": 2},
+            {"id": 3}
+        ]
     }
 
 @router.get("/{event_id}")
-def get_event(event_id: int)-> EventSchema:
+def get_event(event_id: int) -> EventSchema:
     """
     Endpoint to retrieve a specific event by its ID.
     """

@@ -26,8 +26,8 @@ def create_event(payload:EventCreateSchema) -> EventSchema:
     """
     Endpoint to create a new event.
     """
-    print(payload.page)
-    return {"id": 123}
+    data = payload.model_dump() # Convert Pydantic model to dict
+    return {"id": 123, **data}
 
 @router.get("/{event_id}")
 def get_event(event_id: int) -> EventSchema:
@@ -41,5 +41,5 @@ def update_event(event_id: int, payload:EventUpdateSchema) -> EventSchema:
     """
     Endpoint to update an existing event by its ID.
     """
-    print(payload.description)
-    return {"id": event_id}
+    data = payload.model_dump()
+    return {"id": event_id, **data}
